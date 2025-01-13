@@ -88,10 +88,13 @@ def convert():
     return render_template('index.html', message="File converted successfully!", converted_file=output_filename)
 
 
+CONVERTED_FOLDER = os.path.join(app.root_path, 'converted_files')
+
+# Route untuk mendownload file
 @app.route('/download/<filename>')
-def download(filename):
-    """Serve converted files."""
-    return send_from_directory(app.config['CONVERTED_FOLDER'], filename)
+def download_file(filename):
+    # Kirim file dari folder 'converted_files'
+    return send_from_directory(CONVERTED_FOLDER, filename)
 
 
 if __name__ == '__main__':
