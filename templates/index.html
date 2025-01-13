@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Converter</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            font-size: 1rem;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+
+        .form-label {
+            font-size: 1rem;
+        }
+
+        .alert {
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 600px;
+            }
+
+            .btn-custom {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Video Converter</h1>
+        <p class="text-center">Upload your MOV file to convert it into MP4 format with optimized settings.</p>
+
+        <!-- Form untuk upload file -->
+        <form action="/convert" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="videoFile" class="form-label">Choose a MOV File</label>
+                <input class="form-control" type="file" id="videoFile" name="input_file" required>
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-custom">Convert Video</button>
+            </div>
+        </form>
+
+        <!-- Pesan sukses -->
+        {% if converted_file %}
+        <div class="alert alert-success mt-3" role="alert">
+            <p>Conversion successful! <a href="{{ url_for('download', filename=converted_file) }}" class="alert-link">Download your video here</a>.</p>
+        </div>
+        {% endif %}
+
+        <!-- Pesan error -->
+        {% if error %}
+        <div class="alert alert-danger mt-3" role="alert">
+            <p>{{ error }}</p>
+        </div>
+        {% endif %}
+
+        <div class="footer">
+            <p>&copy; 2025 kingashari. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
